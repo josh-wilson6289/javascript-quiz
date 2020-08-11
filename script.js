@@ -8,8 +8,21 @@ var body = document.body
 
 var secondsLeft = 60;
 
+// creates a variable for all questions
+var firstQuestion = {
+  question:"Question 1", 
+  choice1:"Choice 1",                   
+  choice2:"Choice 2",                 
+  choice3:"Choice 3",                  
+  choice4:"Choice 4"
+}
+
+
+// set the questions object
+
+
 // removes startGame html element, starts timer countdown, and displays first question
-function start() {
+function startQuiz() {
   startGame.remove();
   startTimer();
   askFirstQuestion();
@@ -46,11 +59,11 @@ function askFirstQuestion() {
 
   // set text for elements
   questionNumber.textContent = "Question 1";
-  question.textContent = "Commonly used data types DO NOT include ";
-  choice1.textContent = "Strings";
-  choice2.textContent = "Booleans";
-  choice3.textContent = "Alerts";
-  choice4.textContent = "Numbers";
+  question.textContent = firstQuestion.question;
+  choice1.textContent = firstQuestion.choice1;
+  choice2.textContent = firstQuestion.choice2;
+  choice3.textContent = firstQuestion.choice3;
+  choice4.textContent = firstQuestion.choice4;
 
   // Append elements
   body.appendChild(container);
@@ -81,4 +94,4 @@ function askFirstQuestion() {
 
 
 // click to start game
-startBtn.addEventListener("click", start);
+startBtn.addEventListener("click", startQuiz);
