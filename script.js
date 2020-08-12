@@ -6,7 +6,7 @@ var startBtn = document.getElementById("start-btn");
 
 var body = document.body
 
-var secondsLeft = 60;
+var secondsLeft = 30;
 
 // creates a variable for all questions
 var firstQuestion = {
@@ -34,12 +34,16 @@ function startTimer() {
     secondsLeft--;
     timeLeft.textContent = "Time left: " + secondsLeft;
   
-  if(secondsLeft === 0) {
-    stopTimer();
-  }
+  renderTime();
   }, 1000);
 }
 
+function renderTime() {
+  timeLeft.textContent = "Time left: " + secondsLeft;
+  if (secondsLeft === 0) {
+    stopTimer();
+  }
+}
 function stopTimer() {
   alert("Time's up!");
   clearInterval(timerInterval);
@@ -77,18 +81,14 @@ function askFirstQuestion() {
   choiceDiv.appendChild(choice4);
 
   // make buttons btn-primary bootstrap buttons
-  container.classList.add("container-fluid");
-  row.classList.add("row");
-  row.classList.add("justify-content-center");
-  choiceDiv.classList.add("choice-btns");
-  choice1.classList.add("btn");
-  choice1.classList.add("btn-primary");
-  choice2.classList.add("btn");
-  choice2.classList.add("btn-primary");
-  choice3.classList.add("btn");
-  choice3.classList.add("btn-primary");
-  choice4.classList.add("btn");
-  choice4.classList.add("btn-primary");
+  container.className = "container-fluid";
+  row.className = "row";
+  row.className = "justify-content-center";
+  choiceDiv.className = "choice-btns";
+  choice1.className = "btn btn-primary";
+  choice2.className = "btn btn-primary";
+  choice3.className = "btn btn-primary";
+  choice4.className = " btn btn-primary";
 }
 
 
