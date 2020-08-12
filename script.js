@@ -8,24 +8,32 @@ var body = document.body
 
 var secondsLeft = 30;
 
-// creates a variable for all questions
-var firstQuestion = {
-  question:"Question 1", 
-  choice1:"Choice 1",                   
-  choice2:"Choice 2",                 
-  choice3:"Choice 3",                  
-  choice4:"Choice 4"
-}
+// creates an object for all questions
+var listOfquestions = [{
+  question: "Question 1", 
+  choice1: "Choice 1A",                   
+  choice2: "Choice 2A",                 
+  choice3: "Choice 3A",                  
+  choice4: "Choice 4A",
+  correctAnswer: "Choice 1A"
+},
+  {question: "Question 2",
+  choice1: "Choice 2A",
+  choice2: "Choice 2B",
+  choice3: "Choice 2C",
+  choice4: "Choice 2D",
+  correctAnswer: "Choice 2B"
+}];
 
+questionNumber = 0;
 
-// set the questions object
 
 
 // removes startGame html element, starts timer countdown, and displays first question
 function startQuiz() {
   startGame.remove();
   startTimer();
-  askFirstQuestion();
+  nextQuestion();
 }
 
 // displays timer on screen.  will add more if statements to decrement/clear depending on answers
@@ -46,34 +54,33 @@ function renderTime() {
 }
 function stopTimer() {
   alert("Time's up!");
-  clearInterval(timerInterval);
+  secondsLeft = 30;
+  renderTime();
 }
 
 // create html elements for first question
-function askFirstQuestion() {
+function nextQuestion() {
   var container = document.createElement("div");
   var row = document.createElement("div");
-  var questionNumber = document.createElement("h1");
-  var question = document.createElement("p");
+  var questionP = document.createElement("p");
   var choiceDiv = document.createElement("div");
   var choice1 = document.createElement("button");
   var choice2 = document.createElement("button");
   var choice3 = document.createElement("button");
   var choice4 = document.createElement("button");
+  var currentQuestion = listOfquestions[questionNumber];
 
   // set text for elements
-  questionNumber.textContent = "Question 1";
-  question.textContent = firstQuestion.question;
-  choice1.textContent = firstQuestion.choice1;
-  choice2.textContent = firstQuestion.choice2;
-  choice3.textContent = firstQuestion.choice3;
-  choice4.textContent = firstQuestion.choice4;
+  questionP.textContent = currentQuestion.question;
+  choice1.textContent = currentQuestion.choice1;
+  choice2.textContent = currentQuestion.choice2;
+  choice3.textContent = currentQuestion.choice3;
+  choice4.textContent = currentQuestion.choice4;
 
   // Append elements
   body.appendChild(container);
   container.appendChild(row);
-  container.appendChild(questionNumber);
-  container.appendChild(question);
+  container.appendChild(questionP);
   container.appendChild(choiceDiv);
   choiceDiv.appendChild(choice1);
   choiceDiv.appendChild(choice2);
