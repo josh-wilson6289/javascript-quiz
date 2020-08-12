@@ -35,9 +35,8 @@ var listOfQuestions = [{
   correctAnswer: "Choice 3C"
 }];
 
+// sets question number to 0, which will be the index for listOfQuestions later
 questionNumber = 0;
-
-
 
 // removes startGame html element, starts timer countdown, and displays first question
 function startQuiz() {
@@ -46,35 +45,41 @@ function startQuiz() {
   nextQuestion();
 }
 
-// displays timer on screen.  will add more if statements to decrement/clear depending on answers
+// initiates the timer to decrement every second
 function startTimer() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
-    timeLeft.textContent = "Time left: " + secondsLeft;
-  
   renderTime();
   }, 1000);
 }
 
+// displays time left.  calls stopTimer when time is up.
 function renderTime() {
   timeLeft.textContent = "Time left: " + secondsLeft;
-  if (secondsLeft === 0) {
+  if (secondsLeft <= 0) {
     stopTimer();
   }
 }
+
+// tells the user time is up.  resets the clock, and moves to the next question
+// ***** still having scope issues to get HTML to clear so the next question displays properly *****
 function stopTimer() {
   alert("Time's up!");
   secondsLeft = 30;
-  renderTime();
+  questionNumber++;
+  nextQuestion();
+  renderTime(secondsLeft);
 }
 
-// create html elements for each question
+// function nextQuestion creates HTML for the given question number
+// stops game if there are no more questions
 function nextQuestion() {
   if (questionNumber > 2) {
     console.log("quiz over");
   }
   else {
 
+  //creates variables for all created html elements
   var container = document.createElement("div");
   var row = document.createElement("div");
   var header = document.createElement("h1")
@@ -85,11 +90,11 @@ function nextQuestion() {
   var choice3 = document.createElement("button");
   var choice4 = document.createElement("button");
 
-  // takes the current question object
+  // variables for the current question object
   var currentQuestion = listOfQuestions[questionNumber];
   var currentAnswer = currentQuestion.correctAnswer;
 
-  // set text for elements
+  // set text for html elements
   header.textContent = currentQuestion.header;
   question.textContent = currentQuestion.question;
   choice1.textContent = currentQuestion.choice1;
@@ -108,7 +113,8 @@ function nextQuestion() {
   choiceDiv.appendChild(choice3);
   choiceDiv.appendChild(choice4);
 
-  // make buttons btn-primary bootstrap buttons
+  // style buttons btn-primary bootstrap buttons
+  // **** why are these buttons not centered? *****
   container.className = "container-fluid";
   row.className = "row";
   row.className = "justify-content-center";
@@ -118,6 +124,7 @@ function nextQuestion() {
   choice3.className = "btn btn-primary";
   choice4.className = "btn btn-primary";
   
+  // add event listeners for each button to check answer
   choice1.addEventListener("click", checkAnswer);
   choice2.addEventListener("click", checkAnswer);
   choice3.addEventListener("click", checkAnswer);
@@ -126,18 +133,17 @@ function nextQuestion() {
   }
     //checks if the button clicked is the correct answer
     function checkAnswer() {
-      console.log(this.textContent);
-      console.log(currentAnswer);
+    // removes html, and moves on to next question.  need to add score
       if (this.textContent === currentAnswer) {
         questionNumber++;
         container.remove();
         nextQuestion();
       }
+    // decrements seconds by 10.  need to add score
       else {
-        console.log("incorrect answer")
+        secondsLeft = secondsLeft - 10;
+        renderTime();
       }
-
-      
     }
 }
 
