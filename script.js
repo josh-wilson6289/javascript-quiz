@@ -7,6 +7,7 @@ var endQuizContainer = document.getElementById("end-quiz-container");
 var startBtn = document.getElementById("start-btn");
 var highScores = document.getElementById("high-scores");
 var finalScore = document.getElementById("final-score");
+var submitScoreBtn = document.getElementById("submit-score-btn");
 
 endQuizContainer.style.display = "none";
 
@@ -157,15 +158,15 @@ function endQuiz() {
   quizContainer.style.display = "none";
   timeLeft.innerHTML ="";
   endQuizContainer.style.display = "block";
-
   finalScore.textContent = "Your score is: " + score;
 }
 
 function viewHighScores() {
-  
+  event.preventDefault();
   console.log("High scores go here");
   startContainer.innerHTML="";
   quizContainer.innerHTML="";
+  endQuizContainer.innerHTML="";
 
 }
 
@@ -174,3 +175,6 @@ startBtn.addEventListener("click", startQuiz);
 
 // view high scores
 highScores.addEventListener("click", viewHighScores);
+
+// submit user score
+submitScoreBtn.addEventListener("click", viewHighScores);
