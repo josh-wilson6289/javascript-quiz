@@ -13,12 +13,11 @@ var initialsInput = document.getElementById("initialsInput");
 var firstHighScore = document.getElementById("first-score");
 var secondHighScore = document.getElementById("second-score");
 var thirdHighScore = document.getElementById("third-score");
-var playAgainBtn = document.getElementById("play-again-button");
+var playAgainBtn = document.getElementById("play-again-btn");
 var clearScoresBtn = document.getElementById("clear-scores");
 
 //clear all containers except start
 endQuizContainer.style.display = "none";
-highScoreContainer.style.display = "none";
 
 // needed variables for later
 var body = document.body;  
@@ -58,6 +57,7 @@ questionNumber = 0;
 // hides start and end quiz containers, starts timer countdown, and displays first question
 function startQuiz() {
   startContainer.style.display = "none";
+  highScoreContainer.style.display = "none";
   startTimer();
   nextQuestion();
 }
@@ -179,24 +179,31 @@ function viewHighScores() {
 
   var user = JSON.parse(localStorage.getItem("user"));
   // sort high scores
-  // var sorted = Object.keys(user).sort(function(a,b) {return list[a]-list[b]})
+  // var sorted = Object.keys(user).sort(function(initials,score) {return list[initials]-list[score]})
  
   // high scores go here
-
- 
-  //create ol and li for high scores plus a button to play again
+  firstHighScore.textContent = user[0];
+  secondHighScore.textContent = user[1];
+  thirdHighScore.textContent = user[2];
 }
 
 // adds person object (initials and score) to local storage, then triggers view scores function
 function submitScore() {
   event.preventDefault();
+  
   var user = [];
   var person = {initials: initialsInput.value, score: score};
   user.push(person);
+  console.log(person);
   console.log(user);
-
+  
   localStorage.setItem("user", JSON.stringify(user));
   viewHighScores();
+}
+
+//clears local storage
+function clearHighScores() {
+  localStorage.clear();
 }
 
 // click to start game
@@ -207,3 +214,5 @@ highScores.addEventListener("click", viewHighScores);
 
 // submit user score
 submitScoreBtn.addEventListener("click", submitScore);
+
+clearScoresBtn.addEventListener("click", clearHighScores);
