@@ -6,6 +6,10 @@ var quizContainer = document.getElementById("quiz-container");
 var endQuizContainer = document.getElementById("end-quiz-container");
 var startBtn = document.getElementById("start-btn");
 var highScores = document.getElementById("high-scores");
+var finalScore = document.getElementById("final-score");
+
+endQuizContainer.style.display = "none";
+
 
 var body = document.body;  
 
@@ -45,7 +49,6 @@ questionNumber = 0;
 // hides start and end quiz containers, starts timer countdown, and displays first question
 function startQuiz() {
   startContainer.style.display = "none";
-  endQuizContainer.style.display = "none";
   startTimer();
   nextQuestion();
 }
@@ -106,7 +109,6 @@ function nextQuestion() {
     choice4.textContent = currentQuestion.choice4;
 
     // Append elements
-    // body.appendChild(container);
     quizContainer.appendChild(header);
     quizContainer.appendChild(row);
     quizContainer.appendChild(question);
@@ -151,10 +153,12 @@ function nextQuestion() {
 
 // ends game and displays user's score
 function endQuiz() {
- quizContainer.innerHTML ="";
- timeLeft.innerHTML ="";
-console.log("End Quiz")
- 
+// clears 
+  quizContainer.style.display = "none";
+  timeLeft.innerHTML ="";
+  endQuizContainer.style.display = "block";
+
+  finalScore.textContent = "Your score is: " + score;
 }
 
 function viewHighScores() {
@@ -162,6 +166,7 @@ function viewHighScores() {
   console.log("High scores go here");
   startContainer.innerHTML="";
   quizContainer.innerHTML="";
+
 }
 
 // click to start game

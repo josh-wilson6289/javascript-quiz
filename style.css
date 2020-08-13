@@ -26,3 +26,20 @@ p {
   justify-content: center;
 }
 
+form {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+.justify-content-center {
+  font-size: 10px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  justify-content: center;
+}
