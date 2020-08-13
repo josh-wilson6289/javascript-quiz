@@ -15,6 +15,7 @@ var secondHighScore = document.getElementById("second-score");
 var thirdHighScore = document.getElementById("third-score");
 var playAgainBtn = document.getElementById("play-again-btn");
 var clearScoresBtn = document.getElementById("clear-scores");
+var scoresList = document.getElementById("scores-list");
 
 //clear all containers except start
 endQuizContainer.style.display = "none";
@@ -182,21 +183,24 @@ function viewHighScores() {
   // var sorted = Object.keys(user).sort(function(initials,score) {return list[initials]-list[score]})
  
   // high scores go here
-  firstHighScore.textContent = user[0];
-  secondHighScore.textContent = user[1];
-  thirdHighScore.textContent = user[2];
+  
+  firstHighScore.textContent = user[0].initials + ": " + user[0].score;
+  secondHighScore.textContent = user[1].initials + ": " + user[1].score;
+  thirdHighScore.textContent = user[2].initials + ": " + user[2].score;
 }
 
 // adds person object (initials and score) to local storage, then triggers view scores function
 function submitScore() {
   event.preventDefault();
   
-  var user = [];
+  var user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    user = [];
+  }
+
   var person = {initials: initialsInput.value, score: score};
   user.push(person);
-  console.log(person);
-  console.log(user);
-  
+
   localStorage.setItem("user", JSON.stringify(user));
   viewHighScores();
 }
@@ -204,6 +208,8 @@ function submitScore() {
 //clears local storage
 function clearHighScores() {
   localStorage.clear();
+  scoresList.style.display = "none"
+
 }
 
 // click to start game
