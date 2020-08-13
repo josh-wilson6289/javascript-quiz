@@ -1,11 +1,11 @@
 // create needed HTML elements to variables
 var highScores = document.getElementById("high-scores");
 var timeLeft = document.getElementById("time-left");
-var welcome = document.getElementById("welcome");
-var startBtn = document.getElementById("start-btn");
+var startContainer = document.getElementById("start-container");
 var quizContainer = document.getElementById("quiz-container");
+var endQuizContainer = document.getElementById("end-quiz-container");
+var startBtn = document.getElementById("start-btn");
 var highScores = document.getElementById("high-scores");
-
 
 var body = document.body;  
 
@@ -42,9 +42,10 @@ var listOfQuestions = [{
 // sets question number to 0, which will be the index for listOfQuestions later
 questionNumber = 0;
 
-// removes startGame html element, starts timer countdown, and displays first question
+// hides start and end quiz containers, starts timer countdown, and displays first question
 function startQuiz() {
-  welcome.innerHTML="";
+  startContainer.style.display = "none";
+  endQuizContainer.style.display = "none";
   startTimer();
   nextQuestion();
 }
@@ -56,7 +57,6 @@ function startTimer() {
     
     if (secondsLeft <= 0 || questionNumber > 2) {
       clearInterval(timerInterval);
-      // endQuiz();
     }
     else {
       renderTime();
@@ -112,7 +112,6 @@ function nextQuestion() {
     choiceDiv.appendChild(choice4);
 
     // style buttons btn-primary bootstrap buttons
-    // **** why are these buttons not centered? *****
     quizContainer.className = "container-fluid";
     row.className = "row justify-content-center";
     choiceDiv.className = "choice-btns";
@@ -126,7 +125,7 @@ function nextQuestion() {
     choice2.addEventListener("click", checkAnswer);
     choice3.addEventListener("click", checkAnswer);
     choice4.addEventListener("click", checkAnswer);
-  }
+    }
     //checks if the button clicked is the correct answer
     function checkAnswer() {
     // removes html, and moves on to next question.  need to add score
@@ -134,25 +133,34 @@ function nextQuestion() {
         questionNumber++;
         score += 10;
       }
-    // decrements seconds by 10.  need to add score
+    // decrements seconds by 10, takes 10 points off score
       else {
         secondsLeft -= 10;
         score -= 10;
       }
+    // clears all html and moves to the next question
       quizContainer.innerHTML="";
       nextQuestion()
     }
-}
+  }
 
 // ends game and displays user's score
 function endQuiz() {
- console.log("game over");
  quizContainer.innerHTML ="";
  timeLeft.innerHTML ="";
+
+ 
 }
 
-
-
+function viewHighScores() {
+  
+  console.log("High scores go here");
+  startContainer.innerHTML="";
+  quizContainer.innerHTML="";
+}
 
 // click to start game
 startBtn.addEventListener("click", startQuiz);
+
+// view high scores
+highScores.addEventListener("click", viewHighScores);
