@@ -4,16 +4,24 @@ var timeLeft = document.getElementById("time-left");
 var startContainer = document.getElementById("start-container");
 var quizContainer = document.getElementById("quiz-container");
 var endQuizContainer = document.getElementById("end-quiz-container");
+var highScoreContainer = document.getElementById("high-score-container");
 var startBtn = document.getElementById("start-btn");
 var highScores = document.getElementById("high-scores");
 var finalScore = document.getElementById("final-score");
 var submitScoreBtn = document.getElementById("submit-score-btn");
+var initialsInput = document.getElementById("initialsInput");
+var firstHighScore = document.getElementById("first-score");
+var secondHighScore = document.getElementById("second-score");
+var thirdHighScore = document.getElementById("third-score");
+var playAgainBtn = document.getElementById("play-again-button");
+var clearScoresBtn = document.getElementById("clear-scores");
 
+//clear all containers except start
 endQuizContainer.style.display = "none";
+highScoreContainer.style.display = "none";
 
-
+// needed variables for later
 var body = document.body;  
-
 var secondsLeft = 30;
 var score = 0;
 
@@ -154,20 +162,41 @@ function nextQuestion() {
 
 // ends game and displays user's score
 function endQuiz() {
-// clears 
+// clears start and quiz containers, and shows the user's final score
   quizContainer.style.display = "none";
   timeLeft.innerHTML ="";
   endQuizContainer.style.display = "block";
   finalScore.textContent = "Your score is: " + score;
 }
 
+// grabs high scores from local storage and displays them
 function viewHighScores() {
   event.preventDefault();
-  console.log("High scores go here");
+  highScoreContainer.style.display = "block";
   startContainer.innerHTML="";
   quizContainer.innerHTML="";
   endQuizContainer.innerHTML="";
 
+  var user = JSON.parse(localStorage.getItem("user"));
+  // sort high scores
+  // var sorted = Object.keys(user).sort(function(a,b) {return list[a]-list[b]})
+ 
+  // high scores go here
+
+ 
+  //create ol and li for high scores plus a button to play again
+}
+
+// adds person object (initials and score) to local storage, then triggers view scores function
+function submitScore() {
+  event.preventDefault();
+  var user = [];
+  var person = {initials: initialsInput.value, score: score};
+  user.push(person);
+  console.log(user);
+
+  localStorage.setItem("user", JSON.stringify(user));
+  viewHighScores();
 }
 
 // click to start game
@@ -177,4 +206,4 @@ startBtn.addEventListener("click", startQuiz);
 highScores.addEventListener("click", viewHighScores);
 
 // submit user score
-submitScoreBtn.addEventListener("click", viewHighScores);
+submitScoreBtn.addEventListener("click", submitScore);

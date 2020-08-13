@@ -43,12 +43,22 @@
                <div class = "justify-content-center">
                  <label for="formGroupExampleInput">Enter Your Initials</label>
                </div>
-                 <input type="text" class="form-control" id="formGroupExampleInput">
+                 <input id="initialsInput" type="text" class="form-control" id="formGroupExampleInput">
                  <div class = "justify-content-center">
                  <input id="submit-score-btn" class="btn btn-primary" type="submit" value="Submit">
                  </div>
               </div>  
             </form>
+      </div>
+      <div id="high-score-container">
+        <hi>High Scores</hi>
+          <ol>
+            <li id="first-score"></li>
+            <li id="second-score"></li>
+            <li id="third-score"></li>
+          </ol>
+          <button id="play-again-btn" type="button" class="btn btn-primary">Play Again</button>
+          <button id = "clear-scores" type="button" class="btn btn-primary">Clear Scores</button>
       </div>
   </div>
   
