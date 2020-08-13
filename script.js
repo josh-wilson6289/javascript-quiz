@@ -55,7 +55,12 @@ function startTimer() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
     
-    if (secondsLeft <= 0 || questionNumber > 2) {
+// if else statements to determine if the quiz should end
+    if (secondsLeft <= 0) {  
+      endQuiz();
+      clearInterval(timerInterval);
+    }
+    else if (questionNumber > 2) {
       clearInterval(timerInterval);
     }
     else {
@@ -148,7 +153,7 @@ function nextQuestion() {
 function endQuiz() {
  quizContainer.innerHTML ="";
  timeLeft.innerHTML ="";
-
+console.log("End Quiz")
  
 }
 
