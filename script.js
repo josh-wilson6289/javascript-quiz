@@ -1,13 +1,16 @@
 // create needed HTML elements to variables
 var highScores = document.getElementById("high-scores");
 var timeLeft = document.getElementById("time-left");
-var startGame = document.getElementById("start-game");
+var welcome = document.getElementById("welcome");
 var startBtn = document.getElementById("start-btn");
 var quizContainer = document.getElementById("quiz-container");
+var highScores = document.getElementById("high-scores");
+
 
 var body = document.body;  
 
 var secondsLeft = 30;
+var score = 0;
 
 // creates an object for all questions
 var listOfQuestions = [{
@@ -41,7 +44,7 @@ questionNumber = 0;
 
 // removes startGame html element, starts timer countdown, and displays first question
 function startQuiz() {
-  startGame.remove();
+  welcome.innerHTML="";
   startTimer();
   nextQuestion();
 }
@@ -77,60 +80,59 @@ function stopTimer() {
 // stops game if there are no more questions
 function nextQuestion() {
   if (questionNumber > 2) {
-    console.log("quiz over");
+    endQuiz();
   }
   else {
 
   //creates variables for all created html elements
   // var container = document.createElement("div");
-  var row = document.createElement("div");
-  var header = document.createElement("h1")
-  var question = document.createElement("p");
-  var choiceDiv = document.createElement("div");
-  var choice1 = document.createElement("button");
-  var choice2 = document.createElement("button");
-  var choice3 = document.createElement("button");
-  var choice4 = document.createElement("button");
+    var row = document.createElement("div");
+    var header = document.createElement("h1")
+    var question = document.createElement("p");
+    var choiceDiv = document.createElement("div");
+    var choice1 = document.createElement("button");
+    var choice2 = document.createElement("button");
+    var choice3 = document.createElement("button");
+    var choice4 = document.createElement("button");
 
-  // variables for the current question object
-  var currentQuestion = listOfQuestions[questionNumber];
-  var currentAnswer = currentQuestion.correctAnswer;
+    // variables for the current question object
+    var currentQuestion = listOfQuestions[questionNumber];
+    var currentAnswer = currentQuestion.correctAnswer;
 
-  // set text for html elements
-  header.textContent = currentQuestion.header;
-  question.textContent = currentQuestion.question;
-  choice1.textContent = currentQuestion.choice1;
-  choice2.textContent = currentQuestion.choice2;
-  choice3.textContent = currentQuestion.choice3;
-  choice4.textContent = currentQuestion.choice4;
+    // set text for html elements
+    header.textContent = currentQuestion.header;
+    question.textContent = currentQuestion.question;
+    choice1.textContent = currentQuestion.choice1;
+    choice2.textContent = currentQuestion.choice2;
+    choice3.textContent = currentQuestion.choice3;
+    choice4.textContent = currentQuestion.choice4;
 
-  // Append elements
-  // body.appendChild(container);
-  quizContainer.appendChild(header);
-  quizContainer.appendChild(row);
-  quizContainer.appendChild(question);
-  quizContainer.appendChild(choiceDiv);
-  choiceDiv.appendChild(choice1);
-  choiceDiv.appendChild(choice2);
-  choiceDiv.appendChild(choice3);
-  choiceDiv.appendChild(choice4);
+    // Append elements
+    // body.appendChild(container);
+    quizContainer.appendChild(header);
+    quizContainer.appendChild(row);
+    quizContainer.appendChild(question);
+    quizContainer.appendChild(choiceDiv);
+    choiceDiv.appendChild(choice1);
+    choiceDiv.appendChild(choice2);
+    choiceDiv.appendChild(choice3);
+    choiceDiv.appendChild(choice4);
 
-  // style buttons btn-primary bootstrap buttons
-  // **** why are these buttons not centered? *****
-  quizContainer.className = "container-fluid";
-  row.className = "row justify-content-center";
-  choiceDiv.className = "choice-btns";
-  choice1.className = "btn btn-primary";
-  choice2.className = "btn btn-primary";
-  choice3.className = "btn btn-primary";
-  choice4.className = "btn btn-primary";
-  
-  // add event listeners for each button to check answer
-  choice1.addEventListener("click", checkAnswer);
-  choice2.addEventListener("click", checkAnswer);
-  choice3.addEventListener("click", checkAnswer);
-  choice4.addEventListener("click", checkAnswer);
-
+    // style buttons btn-primary bootstrap buttons
+    // **** why are these buttons not centered? *****
+    quizContainer.className = "container-fluid";
+    row.className = "row justify-content-center";
+    choiceDiv.className = "choice-btns";
+    choice1.className = "btn btn-primary";
+    choice2.className = "btn btn-primary";
+    choice3.className = "btn btn-primary";
+    choice4.className = "btn btn-primary";
+    
+    // add event listeners for each button to check answer
+    choice1.addEventListener("click", checkAnswer);
+    choice2.addEventListener("click", checkAnswer);
+    choice3.addEventListener("click", checkAnswer);
+    choice4.addEventListener("click", checkAnswer);
   }
     //checks if the button clicked is the correct answer
     function checkAnswer() {
@@ -138,16 +140,27 @@ function nextQuestion() {
       if (this.textContent === currentAnswer) {
         questionNumber++;
         quizContainer.innerHTML="";
+        score += 10;
         nextQuestion();
       }
     // decrements seconds by 10.  need to add score
       else {
         secondsLeft = secondsLeft - 10;
-        // renderTime();  
+        score -= 10;
       }
+      console.log(score);
     }
 }
 
+// ends game and displays user's score
+function endQuiz() {
+  clearTimer();
+  quizContainer="";
+}
+
+function clearTimer(){
+  timeLeft.innerHTML="";
+}
 
 
 // click to start game
