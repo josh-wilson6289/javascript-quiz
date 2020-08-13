@@ -53,27 +53,20 @@ function startQuiz() {
 function startTimer() {
   var timerInterval = setInterval(function() {
     secondsLeft--;
-  renderTime();
+    
+    if (secondsLeft <= 0 || questionNumber > 2) {
+      clearInterval(timerInterval);
+      // endQuiz();
+    }
+    else {
+      renderTime();
+   }
   }, 1000);
 }
 
 // displays time left.  calls stopTimer when time is up.
 function renderTime() {
   timeLeft.textContent = "Time left: " + secondsLeft;
-  if (secondsLeft <= 0) {
-    stopTimer();
-  }
-}
-
-// tells the user time is up.  resets the clock, and moves to the next question
-// ***** still having scope issues to get HTML to clear so the next question displays properly *****
-function stopTimer() {
-  alert("Time's up!");
-  quizContainer.innerHTML="";
-  secondsLeft = 30;
-  questionNumber++;
-  nextQuestion();
-  renderTime(secondsLeft);
 }
 
 // function nextQuestion creates HTML for the given question number
@@ -139,28 +132,26 @@ function nextQuestion() {
     // removes html, and moves on to next question.  need to add score
       if (this.textContent === currentAnswer) {
         questionNumber++;
-        quizContainer.innerHTML="";
         score += 10;
-        nextQuestion();
       }
     // decrements seconds by 10.  need to add score
       else {
-        secondsLeft = secondsLeft - 10;
+        secondsLeft -= 10;
         score -= 10;
       }
-      console.log(score);
+      quizContainer.innerHTML="";
+      nextQuestion()
     }
 }
 
 // ends game and displays user's score
 function endQuiz() {
-  clearTimer();
-  quizContainer="";
+ console.log("game over");
+ quizContainer.innerHTML ="";
+ timeLeft.innerHTML ="";
 }
 
-function clearTimer(){
-  timeLeft.innerHTML="";
-}
+
 
 
 // click to start game
