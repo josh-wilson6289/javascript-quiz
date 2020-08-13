@@ -3,6 +3,7 @@ var highScores = document.getElementById("high-scores");
 var timeLeft = document.getElementById("time-left");
 var startGame = document.getElementById("start-game");
 var startBtn = document.getElementById("start-btn");
+var quizContainer = document.getElementById("quiz-container");
 
 var body = document.body;  
 
@@ -65,6 +66,7 @@ function renderTime() {
 // ***** still having scope issues to get HTML to clear so the next question displays properly *****
 function stopTimer() {
   alert("Time's up!");
+  quizContainer.innerHTML="";
   secondsLeft = 30;
   questionNumber++;
   nextQuestion();
@@ -80,7 +82,7 @@ function nextQuestion() {
   else {
 
   //creates variables for all created html elements
-  var container = document.createElement("div");
+  // var container = document.createElement("div");
   var row = document.createElement("div");
   var header = document.createElement("h1")
   var question = document.createElement("p");
@@ -103,11 +105,11 @@ function nextQuestion() {
   choice4.textContent = currentQuestion.choice4;
 
   // Append elements
-  body.appendChild(container);
-  container.appendChild(header);
-  container.appendChild(row);
-  container.appendChild(question);
-  container.appendChild(choiceDiv);
+  // body.appendChild(container);
+  quizContainer.appendChild(header);
+  quizContainer.appendChild(row);
+  quizContainer.appendChild(question);
+  quizContainer.appendChild(choiceDiv);
   choiceDiv.appendChild(choice1);
   choiceDiv.appendChild(choice2);
   choiceDiv.appendChild(choice3);
@@ -115,9 +117,8 @@ function nextQuestion() {
 
   // style buttons btn-primary bootstrap buttons
   // **** why are these buttons not centered? *****
-  container.className = "container-fluid";
-  row.className = "row";
-  row.className = "justify-content-center";
+  quizContainer.className = "container-fluid";
+  row.className = "row justify-content-center";
   choiceDiv.className = "choice-btns";
   choice1.className = "btn btn-primary";
   choice2.className = "btn btn-primary";
@@ -136,13 +137,13 @@ function nextQuestion() {
     // removes html, and moves on to next question.  need to add score
       if (this.textContent === currentAnswer) {
         questionNumber++;
-        container.remove();
+        quizContainer.innerHTML="";
         nextQuestion();
       }
     // decrements seconds by 10.  need to add score
       else {
         secondsLeft = secondsLeft - 10;
-        renderTime();
+        // renderTime();  
       }
     }
 }
