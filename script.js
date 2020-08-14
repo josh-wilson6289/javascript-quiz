@@ -32,28 +32,28 @@ var score = 0;
 // creates an object for all questions
 var listOfQuestions = [{
   header: "Question 1",
-  question: "Here is question 1", 
-  choice1: "Choice 1A",                   
-  choice2: "Choice 2A",                 
-  choice3: "Choice 3A",                  
-  choice4: "Choice 4A",
-  correctAnswer: "Choice 1A"
+  question: "Commonly used data types DO NOT include:", 
+  choice1: "Strings",                   
+  choice2: "Booleans",                 
+  choice3: "Alerts",                  
+  choice4: "Numbers",
+  correctAnswer: "Alerts"
 },
   {header: "Question 2",
-  question: "Here is question 2",
-  choice1: "Choice 2A",
-  choice2: "Choice 2B",
-  choice3: "Choice 2C",
-  choice4: "Choice 2D",
-  correctAnswer: "Choice 2B"
+  question: "The condition in an if / else statement is enclosed within ____",
+  choice1: "Quotes",
+  choice2: "Curly Brackets",
+  choice3: "Parentheses",
+  choice4: "Square Brackets",
+  correctAnswer: "Parentheses"
 },
   {header: "Question 3",
-  question: "Here is question 3",
-  choice1: "Choice 3A",
-  choice2: "Choice 3B",
-  choice3: "Choice 3C",
-  choice4: "Choice 3D",
-  correctAnswer: "Choice 3C"
+  question: "Arrays in JavaScript can be used to store _____",
+  choice1: "Numbers and Strings",
+  choice2: "Other Arrays",
+  choice3: "Booleans",
+  choice4: "All of the Above",
+  correctAnswer: "All of the Above"
 }];
 
 // sets question number to 0, which will be the index for listOfQuestions later
