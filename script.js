@@ -25,21 +25,22 @@ var scoresList = document.getElementById("scores-list");
 var initialsInput = document.getElementById("initialsInput");
 
 // needed variables for later
-var body = document.body;  
+var body = document.body;
 var secondsLeft = 30;
 var score = 0;
 
 // creates an object for all questions
 var listOfQuestions = [{
   header: "Question 1",
-  question: "Commonly used data types DO NOT include:", 
-  choice1: "Strings",                   
-  choice2: "Booleans",                 
-  choice3: "Alerts",                  
+  question: "Commonly used data types DO NOT include:",
+  choice1: "Strings",
+  choice2: "Booleans",
+  choice3: "Alerts",
   choice4: "Numbers",
   correctAnswer: "Alerts"
 },
-  {header: "Question 2",
+{
+  header: "Question 2",
   question: "The condition in an if / else statement is enclosed within ____",
   choice1: "Quotes",
   choice2: "Curly Brackets",
@@ -47,7 +48,8 @@ var listOfQuestions = [{
   choice4: "Square Brackets",
   correctAnswer: "Parentheses"
 },
-  {header: "Question 3",
+{
+  header: "Question 3",
   question: "Arrays in JavaScript can be used to store _____",
   choice1: "Numbers and Strings",
   choice2: "Other Arrays",
@@ -70,11 +72,11 @@ function startQuiz() {
 
 // initiates the timer to decrement every second
 function startTimer() {
-  var timerInterval = setInterval(function() {
+  var timerInterval = setInterval(function () {
     secondsLeft--;
-    
-// if else statements to determine if the quiz should end
-    if (secondsLeft <= 0) {  
+
+    // if else statements to determine if the quiz should end
+    if (secondsLeft <= 0) {
       endQuiz();
       clearInterval(timerInterval);
     }
@@ -83,7 +85,7 @@ function startTimer() {
     }
     else {
       renderTime();
-   }
+    }
   }, 1000);
 }
 
@@ -100,8 +102,8 @@ function nextQuestion() {
   }
   else {
 
-  //creates variables for all created html elements
-  // var container = document.createElement("div");
+    //creates variables for all created html elements
+    // var container = document.createElement("div");
     var row = document.createElement("div");
     var header = document.createElement("h1")
     var question = document.createElement("p");
@@ -141,34 +143,34 @@ function nextQuestion() {
     choice2.className = "btn btn-primary";
     choice3.className = "btn btn-primary";
     choice4.className = "btn btn-primary";
-    
+
     // add event listeners for each button to check answer
     choice1.addEventListener("click", checkAnswer);
     choice2.addEventListener("click", checkAnswer);
     choice3.addEventListener("click", checkAnswer);
     choice4.addEventListener("click", checkAnswer);
-    }
-    //checks if the button clicked is the correct answer
-    function checkAnswer() {
-    // removes html, and moves on to next question.  need to add score
-      if (this.textContent === currentAnswer) {
-        questionNumber++;
-        score += 10;
-      }
-    // decrements seconds by 10, takes 10 points off score
-      else {
-        secondsLeft -= 10;
-        score -= 10;
-      }
-    // clears all html and moves to the next question
-      quizContainer.innerHTML="";
-      nextQuestion()
-    }
   }
+  //checks if the button clicked is the correct answer
+  function checkAnswer() {
+    // removes html, and moves on to next question.  need to add score
+    if (this.textContent === currentAnswer) {
+      questionNumber++;
+      score += 10;
+    }
+    // decrements seconds by 10, takes 10 points off score
+    else {
+      secondsLeft -= 10;
+      score -= 10;
+    }
+    // clears all html and moves to the next question
+    quizContainer.innerHTML = "";
+    nextQuestion()
+  }
+}
 
 // ends game and displays user's score
 function endQuiz() {
-// clears start and quiz containers, and shows the user's final score
+  // clears start and quiz containers, and shows the user's final score
   quizContainer.style.display = "none";
   timeLeft.style.display = "none";
   endQuizContainer.style.display = "block";
@@ -179,16 +181,16 @@ function endQuiz() {
 function viewHighScores() {
   event.preventDefault();
   highScoreContainer.style.display = "block";
-  startContainer.innerHTML="";
-  quizContainer.innerHTML="";
-  endQuizContainer.innerHTML="";
+  startContainer.innerHTML = "";
+  quizContainer.innerHTML = "";
+  endQuizContainer.innerHTML = "";
 
   var user = JSON.parse(localStorage.getItem("user"));
   // sort high scores?
 
- 
+
   // high scores go here
-  
+
   firstHighScore.textContent = user[0].initials + ": " + user[0].score;
   secondHighScore.textContent = user[1].initials + ": " + user[1].score;
   thirdHighScore.textContent = user[2].initials + ": " + user[2].score;
@@ -197,13 +199,13 @@ function viewHighScores() {
 // adds person object (initials and score) to local storage, then triggers view scores function
 function submitScore() {
   event.preventDefault();
-  
+
   var user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
     user = [];
   }
 
-  var person = {initials: initialsInput.value, score: score};
+  var person = { initials: initialsInput.value, score: score };
   user.push(person);
 
   localStorage.setItem("user", JSON.stringify(user));

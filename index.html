@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Javascript Quiz</title>
 
   <!-- Link to Bootstrap cdn -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <!-- Link to CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
- <div class="container-fluid">
-   <div class="float-left">
+  <div class="container-fluid">
+    <div class="float-left">
       <div id="high-scores">High Scores</div>
     </div>
     <div class="float-right">
       <div id="time-left">Time Left: 30</div>
-   </div>
-   
+    </div>
+
     <div id="start-container">
       <div class="javascript-quiz">
-       <h1>Javascript Quiz!</h1>
-       <p>Answer the following questions within the time limit.<br> Incorrect answers will penalize your score and time by ten seconds!</p>
-     </div>
-     <br> <br>
+        <h1>Javascript Quiz!</h1>
+        <p>Answer the following questions within the time limit.<br> Incorrect answers will penalize your score and time
+          by ten seconds!</p>
+      </div>
+      <br> <br>
 
-    <!-- Start Button -->
+      <!-- Start Button -->
       <div class="text-center">
         <button type="button" class="btn btn-primary" id=start-btn>Start Quiz</button>
-      </div>  
       </div>
+    </div>
 
-      <div id="quiz-container"></div>
+    <div id="quiz-container"></div>
 
-      <div id="end-quiz-container">
-        <h1>Quiz Results</h1>
-          <p id="final-score"></p>
-            <form class>
-              <div class="form-group">
-               <div class = "justify-content-center">
-                 <label for="formGroupExampleInput">Enter Your Initials</label>
-               </div>
-                 <input id="initialsInput" type="text" class="form-control" id="formGroupExampleInput">
-                 <div class = "justify-content-center">
-                 <input id="submit-score-btn" class="btn btn-primary" type="submit" value="Submit">
-                 </div>
-              </div>  
-            </form>
+    <div id="end-quiz-container">
+      <h1>Quiz Results</h1>
+      <p id="final-score"></p>
+      <form class>
+        <div class="form-group">
+          <div class="justify-content-center">
+            <label for="formGroupExampleInput">Enter Your Initials</label>
+          </div>
+          <input id="initialsInput" type="text" class="form-control" id="formGroupExampleInput">
+          <div class="justify-content-center">
+            <input id="submit-score-btn" class="btn btn-primary" type="submit" value="Submit">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="high-score-container">
+      <h1>High Scores</h1>
+      <div class="row">
+        <div class="display-high-scores">
+          <ol id=scores-list>
+            <li id="first-score"></li>
+            <li id="second-score"></li>
+            <li id="third-score"></li>
+          </ol>
+        </div>
       </div>
-      <div id="high-score-container">
-        <h1>High Scores</h1>
-          <div class="row">
-              <div class = "display-high-scores">
-              <ol id=scores-list>
-                <li id="first-score"></li>
-                <li id="second-score"></li>
-                <li id="third-score"></li>
-              </ol>
-            </div>
-          </div>
-            <div class="row">
-          <div class = "display-high-scores">
-            <button id = "play-again" type="button" class="btn btn-primary">Play Again</button>
-            <button id = "clear-scores" type="button" class="btn btn-primary">Clear Scores</button>
-          </div>
-          </div>
+      <div class="row">
+        <div class="display-high-scores">
+          <button id="play-again" type="button" class="btn btn-primary">Play Again</button>
+          <button id="clear-scores" type="button" class="btn btn-primary">Clear Scores</button>
+        </div>
       </div>
-  
+    </div>
+
   </div>
-  
+
 
 
 
@@ -78,8 +82,15 @@
   <!-- Link to JS-->
   <script src="script.js"></script>
   <!-- jQuery for Bootstrap-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
