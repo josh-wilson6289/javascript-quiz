@@ -1,24 +1,28 @@
 // create needed HTML elements to variables
-var highScores = document.getElementById("high-scores");
-var timeLeft = document.getElementById("time-left");
+
+//containers
 var startContainer = document.getElementById("start-container");
 var quizContainer = document.getElementById("quiz-container");
 var endQuizContainer = document.getElementById("end-quiz-container");
 var highScoreContainer = document.getElementById("high-score-container");
+
+//buttons
 var startBtn = document.getElementById("start-btn");
 var highScores = document.getElementById("high-scores");
-var finalScore = document.getElementById("final-score");
 var submitScoreBtn = document.getElementById("submit-score-btn");
-var initialsInput = document.getElementById("initialsInput");
+var playAgainBtn = document.getElementById("play-again");
+var clearScoresBtn = document.getElementById("clear-scores");
+
+//display HTML elements
+var timeLeft = document.getElementById("time-left");
+var finalScore = document.getElementById("final-score");
 var firstHighScore = document.getElementById("first-score");
 var secondHighScore = document.getElementById("second-score");
 var thirdHighScore = document.getElementById("third-score");
-var playAgainBtn = document.getElementById("play-again-btn");
-var clearScoresBtn = document.getElementById("clear-scores");
 var scoresList = document.getElementById("scores-list");
 
-//clear all containers except start
-endQuizContainer.style.display = "none";
+//input HTML elements
+var initialsInput = document.getElementById("initialsInput");
 
 // needed variables for later
 var body = document.body;  
@@ -59,6 +63,7 @@ questionNumber = 0;
 function startQuiz() {
   startContainer.style.display = "none";
   highScoreContainer.style.display = "none";
+  quizContainer.style.display = "block";
   startTimer();
   nextQuestion();
 }
@@ -165,7 +170,7 @@ function nextQuestion() {
 function endQuiz() {
 // clears start and quiz containers, and shows the user's final score
   quizContainer.style.display = "none";
-  timeLeft.innerHTML ="";
+  timeLeft.style.display = "none";
   endQuizContainer.style.display = "block";
   finalScore.textContent = "Your score is: " + score;
 }
@@ -179,8 +184,8 @@ function viewHighScores() {
   endQuizContainer.innerHTML="";
 
   var user = JSON.parse(localStorage.getItem("user"));
-  // sort high scores
-  // var sorted = Object.keys(user).sort(function(initials,score) {return list[initials]-list[score]})
+  // sort high scores?
+
  
   // high scores go here
   
@@ -212,6 +217,14 @@ function clearHighScores() {
 
 }
 
+function resetQuiz() {
+  highScoreContainer.style.display = "none";
+  quizContainer.style.display = "block";
+  timeLeft.left = 30;
+  timeLeft.style.display = "block";
+  startQuiz();
+}
+
 // click to start game
 startBtn.addEventListener("click", startQuiz);
 
@@ -222,3 +235,5 @@ highScores.addEventListener("click", viewHighScores);
 submitScoreBtn.addEventListener("click", submitScore);
 
 clearScoresBtn.addEventListener("click", clearHighScores);
+
+playAgainBtn.addEventListener("click", resetQuiz);
